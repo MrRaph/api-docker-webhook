@@ -4,7 +4,7 @@ FROM python:2.7-alpine
 ADD ./listen_docker_hooks.py /listen_docker_hooks.py
 ADD ./run.sh /run.sh
 
-RUN apk add --no-cache --update docker && \
+RUN apk add --no-cache --update docker curl && \
     pip install requests && \
     rm -f /usr/bin/docker* && \
     chmod +x /run.sh
