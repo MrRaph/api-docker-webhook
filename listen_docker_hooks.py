@@ -39,7 +39,7 @@ class RequestHandler(BaseHTTPRequestHandler):
                        for var, val in json_params['repository'].items())
             env.update(('REPOSITORY_' + var.upper(), str(val))
                        for var, val in json_params['push_data'].items())
-        
+
         # Check if the secret URL was called
         if args.token == self.path[1:]:
             logging.info("Start executing '%s'" % args.cmd)
@@ -54,6 +54,7 @@ class RequestHandler(BaseHTTPRequestHandler):
                     requests.post(json_params['callback_url'],
                                   data=json.dumps(data),
                                   headers=headers)
+
             except OSError as err:
                 self.send_response(500, "OSError")
                 logging.error("You probably didn't use 'sh ./script.sh'.")
